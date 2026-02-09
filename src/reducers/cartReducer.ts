@@ -1,6 +1,8 @@
-export const initialCart = { items: [], total: 0 }
+import type { CartAction, CartItem, CartState } from '@/types/cart'
 
-export function itemReducer(state, action) {
+export const initialCart: CartState = { items: [], total: 0 }
+
+export function itemReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case 'ADD_ITEM': {
       const existingItem = state.items.find(item => item.name === action.item.name)
@@ -14,7 +16,7 @@ export function itemReducer(state, action) {
         }
       }
       return {
-        items: [...state.items, { ...action.item, quantity: 1 }],
+        items: [...state.items, { ...(action.item as Omit<CartItem, 'quantity'>), quantity: 1 }],
         total: state.total + action.item.price,
       }
     }

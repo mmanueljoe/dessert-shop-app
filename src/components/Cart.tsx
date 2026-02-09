@@ -1,7 +1,15 @@
 import { CartItem } from '@components/CartItem'
 import { Sprout } from 'lucide-react'
 import Illustration from '@assets/illustration.png'
-export function Cart({ cart, removeFromCart, orderConfirmation }) {
+import type { CartState, CartItem as CartItemType } from '@/types/cart'
+
+interface CartProps {
+  cart: CartState
+  removeFromCart: (item: CartItemType) => void
+  orderConfirmation: () => void
+}
+
+export function Cart({ cart, removeFromCart, orderConfirmation }: CartProps) {
   const totalQuantity = cart.items.reduce((sum, i) => sum + (i.quantity || 1), 0)
   return (
     <>

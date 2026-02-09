@@ -1,7 +1,26 @@
 import { CircleMinus, ShoppingCart } from 'lucide-react'
 import { CirclePlus } from 'lucide-react'
-export function Card({ name, price, image, category, addToCart, cart, increment, decrement }) {
-  const item = { name, price, image, category }
+import type { CartItem } from '@/types/cart'
+
+interface DessertImage {
+  mobile?: string
+  thumbnail?: string
+  [key: string]: string | undefined
+}
+
+interface CardProps {
+  name: string
+  price: number
+  image?: DessertImage
+  category: string
+  cart: CartItem[]
+  addToCart: (item: Omit<CartItem, 'quantity'>) => void
+  increment: (item: Omit<CartItem, 'quantity'>) => void
+  decrement: (item: Omit<CartItem, 'quantity'>) => void
+}
+
+export function Card({ name, price, image, category, addToCart, cart, increment, decrement }: CardProps) {
+  const item: Omit<CartItem, 'quantity'> = { name, price, image, category }
   const imageUrl = image?.mobile || image?.thumbnail
   const cartItem = cart.find(item => item.name === name)
 

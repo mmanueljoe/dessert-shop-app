@@ -1,7 +1,14 @@
 import { useEffect } from 'react'
 import { CircleCheck } from 'lucide-react'
+import type { CartState } from '@/types/cart'
 
-export function OrderConfirmed({ isOrderConfirmed, cart, onClose }) {
+interface OrderConfirmedProps {
+  isOrderConfirmed: boolean
+  cart: CartState
+  onClose: () => void
+}
+
+export function OrderConfirmed({ isOrderConfirmed, cart, onClose }: OrderConfirmedProps) {
   useEffect(() => {
     if (isOrderConfirmed) {
       document.body.style.overflow = 'hidden'

@@ -6,6 +6,8 @@ import data from '@data/data.json'
 import { itemReducer } from '@reducers/cartReducer'
 import { saveCartToStorage, getCartFromStorage } from '@utils/cartStorage'
 import { OrderConfirmed } from '@components/OrderConfirmed'
+import type { CartItem } from '@/types/cart'
+
 function App() {
   const [cart, dispatch] = useReducer(itemReducer, getCartFromStorage())
   useEffect(() => {
@@ -13,19 +15,19 @@ function App() {
   }, [cart])
   const [isOrderConfirmed, setIsOrderConfirmed] = useState(false)
 
-  function addToCart(item) {
+  function addToCart(item: Omit<CartItem, 'quantity'>) {
     dispatch({ type: 'ADD_ITEM', item })
   }
 
-  function removeFromCart(item) {
+  function removeFromCart(item: CartItem) {
     dispatch({ type: 'REMOVE_ITEM', itemName: item.name, item })
   }
 
-  function increment(item) {
+  function increment(item: Omit<CartItem, 'quantity'>) {
     dispatch({ type: 'INCREMENT', item })
   }
 
-  function decrement(item) {
+  function decrement(item: Omit<CartItem, 'quantity'>) {
     dispatch({ type: 'DECREMENT', item })
   }
 
@@ -48,7 +50,6 @@ function App() {
               key={item.name}
               {...item}
               addToCart={addToCart}
-              removeFromCart={removeFromCart}
               increment={increment}
               decrement={decrement}
               cart={cart.items}
@@ -59,12 +60,7 @@ function App() {
       <div>
         <Cart cart={cart} removeFromCart={removeFromCart} orderConfirmation={orderConfirmation} />
       </div>
-      <OrderConfirmed
-        isOrderConfirmed={isOrderConfirmed}
-        closeOrderModal={closeOrderModal}
-        cart={cart}
-        onClose={closeOrderModal}
-      />
+      <OrderConfirmed isOrderConfirmed={isOrderConfirmed} cart={cart} onClose={closeOrderModal} />
     </div>
   )
 }

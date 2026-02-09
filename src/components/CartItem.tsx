@@ -1,5 +1,12 @@
 import { CircleX } from 'lucide-react'
-export function CartItem({ item, removeFromCart }) {
+import type { CartItem as CartItemType } from '@/types/cart'
+
+interface CartItemProps {
+  item: CartItemType
+  removeFromCart: (item: CartItemType) => void
+}
+
+export function CartItem({ item, removeFromCart }: CartItemProps) {
   return (
     <div className="flex flex-row items-center justify-between border-b border-rose-100 p-200">
       <div className="flex flex-col gap-100">

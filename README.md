@@ -1,16 +1,35 @@
-# React + Vite
+## Dessert Shop App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a small dessert shop interface built with React and TypeScript on top of Vite.  
+It lets you browse a list of desserts, add them to a cart, adjust quantities, and confirm an order in a clean, responsive layout.
 
-Currently, two official plugins are available:
+### What’s implemented
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **TypeScript migration**:  
+  The app was migrated from plain JavaScript/JSX to TypeScript/TSX. All React components, the cart reducer, and local‑storage utilities are now typed, with a shared `CartItem` / `CartState` model in `src/types`.
 
-## React Compiler
+- **Cart logic with reducer**:  
+  Cart state is managed with `useReducer`, using a typed reducer that handles adding items, removing items, incrementing/decrementing quantities, and clearing the cart after an order is confirmed.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Local storage persistence**:  
+  The cart is saved to `localStorage` and restored on page load, so your selections survive refreshes. The storage helper validates the shape of the stored data and falls back to an empty cart if anything looks off.
 
-## Expanding the ESLint configuration
+- **Typed components**:  
+  UI components (`Card`, `Cart`, `CartItem`, `OrderConfirmed`) all use explicit props interfaces. They rely on the shared cart types so that prices, quantities, and images stay consistent across the app.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Asset and JSON typing**:  
+  Image and JSON imports (for dessert data and icons) are supported by lightweight `.d.ts` declarations, keeping TypeScript happy without changing how assets are used.
+
+- **Tooling and quality**:  
+  The project uses a strict `tsconfig`, Vite for the dev/build pipeline, Tailwind CSS for styling, and ESLint + Prettier to keep the codebase tidy and consistent.
+
+### Running the project
+
+- Install dependencies with your preferred package manager (the repo currently uses Yarn):  
+  `yarn`
+- Start the dev server:  
+  `yarn dev`
+- Run linting:  
+  `yarn lint`
+- Build for production:  
+  `yarn build`
