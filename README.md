@@ -1,9 +1,9 @@
-## Dessert Shop App
+# Dessert Shop App
 
 This project is a small dessert shop interface built with React and TypeScript on top of Vite.  
 It lets you browse a list of desserts, add them to a cart, adjust quantities, and confirm an order in a clean, responsive layout.
 
-### What’s implemented
+## What’s implemented
 
 - **TypeScript migration**:  
   The app was migrated from plain JavaScript/JSX to TypeScript/TSX. All React components, the cart reducer, and local‑storage utilities are now typed, with a shared `CartItem` / `CartState` model in `src/types`.
