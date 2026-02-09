@@ -2,16 +2,15 @@ import { CircleMinus, ShoppingCart } from 'lucide-react'
 import { CirclePlus } from 'lucide-react'
 import type { CartItem } from '@/types/cart'
 
-interface DessertImage {
-  mobile?: string
-  thumbnail?: string
-  [key: string]: string | undefined
-}
-
 interface CardProps {
   name: string
   price: number
-  image?: DessertImage
+  image: {
+    mobile: string
+    thumbnail: string
+    tablet: string
+    desktop: string
+  }
   category: string
   cart: CartItem[]
   addToCart: (item: Omit<CartItem, 'quantity'>) => void

@@ -2,7 +2,7 @@ import { useReducer, useEffect, useState } from 'react'
 import './App.css'
 import { Card } from '@components/Card'
 import { Cart } from '@components/Cart'
-import data from '@data/data.json'
+import { desserts } from '@data/data'
 import { itemReducer } from '@reducers/cartReducer'
 import { saveCartToStorage, getCartFromStorage } from '@utils/cartStorage'
 import { OrderConfirmed } from '@components/OrderConfirmed'
@@ -45,7 +45,7 @@ function App() {
       <div className="grid grid-cols-1 gap-400">
         <h2 className="text-preset1 mb-400 font-bold col-span-full">Desserts</h2>
         <div className="grid grid-cols-1 gap-400 md:grid-cols-2 lg:grid-cols-3 lg:gap-200">
-          {data.map(item => (
+          {desserts.map(item => (
             <Card
               key={item.name}
               {...item}
